@@ -95,13 +95,30 @@ nav {
 .hero h1 {
   font-size: clamp(2rem, 6vw, 3.5rem);
   font-weight: 300; color: var(--wood);
-  line-height: 1.3; margin-bottom: 1rem;
+  line-height: 1.4; margin-bottom: 1rem;
   letter-spacing: 2px;
 }
 .hero h1 strong { font-weight: 700; }
 .hero-sub {
   font-size: 1.05rem; color: var(--text-light);
   margin-bottom: 2.5rem; line-height: 1.9;
+}
+
+/* 手機版優化：防止標題和描述斷行不當 */
+@media(max-width:640px) {
+  .hero h1 {
+    font-size: 1.75rem;
+    line-height: 1.5;
+    letter-spacing: 1px;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    line-height: 1.8;
+  }
+  .hero-badge {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+  }
 }
 .hero-cta {
   display: inline-block;
@@ -130,11 +147,35 @@ section { padding: 5rem 2rem; }
   font-size: 0.75rem; letter-spacing: 4px; color: var(--accent);
   text-transform: uppercase; margin-bottom: 0.8rem;
 }
+
+/* 手機版區塊優化 */
+@media(max-width:640px) {
+  section {
+    padding: 3rem 1.5rem; /* 手機版減少上下間距 */
+  }
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+  }
+}
 .section-title {
   font-size: 1.8rem; font-weight: 300; color: var(--wood);
   margin-bottom: 1rem; letter-spacing: 1px;
+  line-height: 1.5; /* 改善行距 */
 }
-.section-title strong { font-weight: 700; }
+.section-title strong {
+  font-weight: 700;
+  white-space: nowrap; /* 防止粗體文字斷行 */
+}
+
+/* 手機版優化：確保標題不會斷得很奇怪 */
+@media(max-width:640px) {
+  .section-title {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+  }
+}
 
 /* ====== ABOUT ====== */
 #about { background: var(--card); }
@@ -156,6 +197,16 @@ section { padding: 5rem 2rem; }
 .about-text p {
   color: var(--text-light); font-size: 0.95rem;
   margin-bottom: 1.2rem;
+  line-height: 1.8;
+}
+
+/* 手機版文字優化 */
+@media(max-width:640px) {
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 1.85;
+    text-align: justify; /* 兩端對齊，更整齊 */
+  }
 }
 .about-features {
   display: flex; gap: 2rem; margin-top: 1.5rem;
@@ -165,13 +216,24 @@ section { padding: 5rem 2rem; }
 }
 .about-feat .num {
   font-size: 1.5rem; font-weight:700; color: var(--wood);
+  white-space: nowrap; /* 防止文字斷行 */
 }
 .about-feat .label {
   font-size: 0.78rem; color: var(--text-light); margin-top:0.2rem;
+  white-space: nowrap; /* 防止文字斷行 */
 }
 
 @media(max-width:768px) {
   .about-grid { grid-template-columns:1fr; }
+  .about-features {
+    gap: 1rem; /* 手機版縮小間距 */
+  }
+  .about-feat .num {
+    font-size: 1.2rem; /* 手機版縮小字體，防止斷行 */
+  }
+  .about-feat .label {
+    font-size: 0.72rem;
+  }
 }
 
 /* ====== PRODUCTS ====== */
@@ -246,6 +308,26 @@ section { padding: 5rem 2rem; }
 
 @media(max-width:768px) {
   .products-grid { grid-template-columns: 1fr; max-width:400px; margin-left:auto; margin-right:auto; }
+}
+
+/* 手機版產品卡片優化 */
+@media(max-width:640px) {
+  .product-card {
+    padding: 1.5rem 1.2rem;
+  }
+  .product-card h3 {
+    font-size: 1rem;
+  }
+  .product-card .size {
+    font-size: 0.7rem;
+  }
+  .product-card .price {
+    font-size: 1.4rem;
+  }
+  .product-btn {
+    font-size: 0.82rem;
+    padding: 0.65rem;
+  }
 }
 
 /* ====== GALLERY ====== */
