@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隆盛木業 — 職人手作實木砧板</title>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #faf8f5;
+  --card: #ffffff;
+  --wood: #3d2b1f;
+  --wood-light: #6b4f3a;
+  --accent: #c4a77d;
+  --accent-light: #e8d8c4;
+  --text: #2c2420;
+  --text-light: #7a6e64;
+  --border: #e8e2db;
+  --success: #5a8a5e;
+  --radius: 8px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Noto Sans TC", "Helvetica Neue", "PingFang TC", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ====== NAV ====== */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: rgba(250,248,245,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 60px;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.5rem;
+  font-size: 1.15rem; font-weight: 700; color: var(--wood);
+  letter-spacing: 2px;
+}
+.nav-logo img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display:flex; gap: 1.8rem; list-style:none; }
+.nav-links a {
+  text-decoration:none; color: var(--text-light); font-size:0.88rem;
+  letter-spacing: 1px; transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--wood); }
+
+@media(max-width:640px) {
+  .nav-links { display:none; }
+}
+
+/* ====== HERO ====== */
+.hero {
+  margin-top: 60px;
+  min-height: 85vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(160deg, #f5efe8 0%, #ede4d8 50%, #e6dace 100%);
+  position: relative; overflow: hidden;
+  padding: 2rem;
+}
+.hero::before {
+  content:''; position:absolute; inset:0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 60px,
+    rgba(196,167,125,0.06) 60px,
+    rgba(196,167,125,0.06) 61px
+  );
+}
+.hero-content {
+  text-align:center; position:relative; z-index:1;
+  max-width: 700px;
+}
+.hero-badge {
+  display:inline-block; padding: 0.35rem 1.2rem;
+  border: 1px solid var(--accent); border-radius: 50px;
+  font-size:0.78rem; color: var(--wood-light);
+  letter-spacing: 3px; margin-bottom: 2rem;
+}
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 300; color: var(--wood);
+  line-height: 1.3; margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+.hero h1 strong { font-weight: 700; }
+.hero-sub {
+  font-size: 1.05rem; color: var(--text-light);
+  margin-bottom: 2.5rem; line-height: 1.9;
+}
+.hero-cta {
+  display: inline-block;
+  padding: 0.9rem 2.5rem;
+  background: var(--wood);
+  color: #fff;
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+}
+.hero-cta:hover { background: var(--wood-light); transform: translateY(-2px); }
+
+/* ====== WOOD GRAIN DIVIDER ====== */
+.divider {
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-light), var(--accent), var(--accent-light));
+  opacity: 0.5;
+}
+
+/* ====== SECTIONS COMMON ====== */
+section { padding: 5rem 2rem; }
+.section-inner { max-width: 960px; margin: 0 auto; }
+.section-label {
+  font-size: 0.75rem; letter-spacing: 4px; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 0.8rem;
+}
+.section-title {
+  font-size: 1.8rem; font-weight: 300; color: var(--wood);
+  margin-bottom: 1rem; letter-spacing: 1px;
+}
+.section-title strong { font-weight: 700; }
+
+/* ====== ABOUT ====== */
+#about { background: var(--card); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  align-items: center; margin-top: 2.5rem;
+}
+.about-img {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(61,43,31,0.15);
+}
+.about-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.about-text p {
+  color: var(--text-light); font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+.about-features {
+  display: flex; gap: 2rem; margin-top: 1.5rem;
+}
+.about-feat {
+  text-align:center; flex:1;
+}
+.about-feat .num {
+  font-size: 1.5rem; font-weight:700; color: var(--wood);
+}
+.about-feat .label {
+  font-size: 0.78rem; color: var(--text-light); margin-top:0.2rem;
+}
+
+@media(max-width:768px) {
+  .about-grid { grid-template-columns:1fr; }
+}
+
+/* ====== PRODUCTS ====== */
+#products { background: var(--bg); }
+.products-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.product-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(61,43,31,0.08);
+}
+.product-card.popular::before {
+  content:'人氣推薦';
+  position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+  background: var(--wood); color:#fff;
+  padding:0.25rem 1rem; border-radius:50px;
+  font-size:0.72rem; letter-spacing:1px;
+}
+.product-visual {
+  width: 100%; aspect-ratio: 1;
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+.product-visual img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+.product-card:hover .product-visual img {
+  transform: scale(1.05);
+}
+.product-card h3 {
+  font-size: 1.1rem; font-weight: 600; color: var(--wood);
+  margin-bottom: 0.3rem;
+}
+.product-spec {
+  font-size: 0.82rem; color: var(--text-light);
+  margin-bottom: 1rem;
+}
+.product-price {
+  font-size: 1.6rem; font-weight: 700; color: var(--wood);
+}
+.product-price span { font-size: 0.85rem; font-weight: 400; }
+.product-btn {
+  display: block; width: 100%;
+  margin-top: 1.2rem; padding: 0.7rem;
+  background: transparent; border: 1.5px solid var(--wood);
+  color: var(--wood);
+  border-radius: var(--radius);
+  font-size: 0.88rem; cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+.product-btn:hover {
+  background: var(--wood); color: #fff;
+}
+
+@media(max-width:768px) {
+  .products-grid { grid-template-columns: 1fr; max-width:400px; margin-left:auto; margin-right:auto; }
+}
+
+/* ====== GALLERY ====== */
+#gallery { background: var(--card); }
+.gallery-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+.gallery-item {
+  aspect-ratio: 4/3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(61,43,31,0.1);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(61,43,31,0.15);
+}
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media(max-width:768px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+
+/* ====== ORDER FORM ====== */
+#order { background: var(--card); }
+.order-wrapper {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;
+  margin-top: 2.5rem;
+}
+.form-group { margin-bottom: 1.2rem; }
+.form-group label {
+  display: block; font-size: 0.82rem; color: var(--text-light);
+  margin-bottom: 0.4rem; letter-spacing: 1px;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.92rem;
+  background: var(--bg);
+  color: var(--text);
+  transition: border-color 0.3s;
+  font-family: inherit;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.form-group textarea { resize: vertical; min-height: 80px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.size-selector {
+  display: flex; gap: 0.8rem; margin-bottom: 1.2rem;
+}
+.size-option {
+  flex:1; padding: 1rem 0.5rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center; cursor: pointer;
+  transition: all 0.3s;
+  background: var(--bg);
+}
+.size-option:hover { border-color: var(--accent); }
+.size-option.active {
+  border-color: var(--wood);
+  background: rgba(61,43,31,0.04);
+}
+.size-option .s-name { font-weight:600; font-size:0.95rem; color:var(--wood); }
+.size-option .s-dim { font-size:0.72rem; color:var(--text-light); margin-top:0.2rem; }
+.size-option .s-price { font-size:0.88rem; font-weight:600; color:var(--accent); margin-top:0.3rem; }
+
+.order-summary {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: 2rem;
+  height: fit-content;
+  position: sticky; top: 80px;
+}
+.summary-title {
+  font-size: 1.1rem; font-weight: 600; color: var(--wood);
+  margin-bottom: 1.5rem; letter-spacing: 1px;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--border);
+}
+.summary-row {
+  display: flex; justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+.summary-row .label { color: var(--text-light); }
+.summary-row .value { font-weight: 600; color: var(--wood); }
+.summary-total {
+  display: flex; justify-content: space-between;
+  padding: 1rem 0 0;
+  margin-top: 0.8rem;
+  border-top: 1.5px solid var(--border);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--wood);
+}
+.bank-info {
+  margin-top: 1.5rem; padding: 1.2rem;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.bank-info h4 {
+  font-size: 0.82rem; color: var(--accent);
+  letter-spacing: 2px; margin-bottom: 0.8rem;
+}
+.bank-info p {
+  font-size: 0.85rem; color: var(--text-light);
+  line-height: 1.8;
+}
+.bank-info strong { color: var(--wood); }
+
+.submit-btn {
+  width: 100%; padding: 1rem;
+  background: var(--wood); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 1rem; font-weight: 600;
+  cursor: pointer; transition: all 0.3s;
+  letter-spacing: 2px;
+  margin-top: 0.5rem;
+}
+.submit-btn:hover { background: var(--wood-light); }
+.submit-btn:disabled { opacity:0.5; cursor:not-allowed; }
+
+@media(max-width:768px) {
+  .order-wrapper { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .size-selector { flex-direction: column; }
+}
+
+/* ====== FOOTER ====== */
+footer {
+  background: var(--wood);
+  color: rgba(255,255,255,0.7);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+footer .footer-logo {
+  height: 120px;
+  width: auto;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+footer .brand { font-size:1.2rem; color:#fff; font-weight:700; letter-spacing:2px; margin-bottom:0.5rem; }
+footer p { font-size:0.82rem; margin-bottom:0.3rem; }
+footer a { color: var(--accent-light); text-decoration:none; }
+
+/* ====== MODAL ====== */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:200;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  align-items:center; justify-content:center;
+  padding: 1rem;
+}
+.modal-overlay.show { display:flex; }
+.modal {
+  background: var(--card);
+  border-radius: 12px;
+  max-width: 500px; width:100%;
+  padding: 2.5rem;
+  text-align:center;
+  position:relative;
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform:scale(0.95) translateY(10px); }
+  to { opacity:1; transform:scale(1) translateY(0); }
+}
+.modal-close {
+  position:absolute; top:1rem; right:1rem;
+  background:none; border:none; font-size:1.5rem;
+  color:var(--text-light); cursor:pointer;
+}
+.modal .check-icon {
+  width:64px; height:64px; margin:0 auto 1.2rem;
+  background: var(--success); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+}
+.modal h2 { font-size:1.3rem; color:var(--wood); margin-bottom:0.5rem; }
+.modal .order-num { font-size:0.88rem; color:var(--accent); margin-bottom:1.5rem; }
+.modal .transfer-box {
+  background:var(--bg); border-radius:var(--radius);
+  padding:1.2rem; text-align:left; margin-bottom:1.5rem;
+  font-size:0.88rem; line-height:1.9; color:var(--text-light);
+}
+.modal .transfer-box strong { color:var(--wood); }
+.modal .payment-instruction {
+  background: #f8f9fa;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: left;
+  margin-top: 1rem;
+}
+.modal .payment-instruction h4 {
+  color: var(--wood);
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+}
+.modal .payment-instruction p {
+  font-size: 0.88rem;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.modal .payment-instruction ul {
+  margin: 0.8rem 0 0.8rem 1.5rem;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+.modal .payment-instruction ul li {
+  margin: 0.3rem 0;
+}
+.modal .payment-instruction .contact-info {
+  background: white;
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+}
+.modal .payment-instruction .contact-info p {
+  margin: 0.3rem 0;
+  font-size: 0.9rem;
+}
+.modal .payment-instruction .contact-info a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.modal .line-btn {
+  width:100%; padding:1rem;
+  background:#06C755; color:#fff; border:none;
+  border-radius:var(--radius); cursor:pointer;
+  font-size:1rem; letter-spacing:1px;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+.modal .line-btn:hover {
+  opacity:0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(6,199,85,0.3);
+}
+.modal .note { font-size:0.78rem; color:var(--text-light); margin-top:1rem; }
+
+/* ====== TOAST ====== */
+.toast {
+  position:fixed; bottom:2rem; left:50%; transform:translateX(-50%);
+  background: var(--wood); color:#fff;
+  padding:0.8rem 2rem; border-radius:50px;
+  font-size:0.88rem; z-index:300;
+  opacity:0; transition: opacity 0.3s;
+  pointer-events:none;
+}
+.toast.show { opacity:1; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="images/logo.png" alt="隆盛木業">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">木材故事</a></li>
+    <li><a href="#products">砧板規格</a></li>
+    <li><a href="#gallery">工藝展示</a></li>
+    <li><a href="#order">立即訂購</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">HANDCRAFTED SINCE 2020</div>
+    <h1>一塊好砧板<br><strong>從好木頭開始</strong></h1>
+    <p class="hero-sub">
+      隆盛木業嚴選非洲柚木，由職人手工打磨，<br>
+      深沉木色、粗獷紋理，為您的廚房注入沉穩的高級質感。
+    </p>
+    <a href="#order" class="hero-cta">立即選購</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">MATERIAL STORY</div>
+    <div class="section-title">嚴選<strong>非洲柚木</strong></div>
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="images/board-hero.jpg" alt="隆盛木業非洲柚木砧板">
+      </div>
+      <div class="about-text">
+        <p>
+          非洲柚木（African Teak）產自西非熱帶雨林，以深巧克力棕色與粗獷的天然紋理聞名。
+          每一塊砧板都經過長時間自然乾燥，保留木材原始的油脂與香氣，紋路獨一無二。
+        </p>
+        <p>
+          非洲柚木天然含油脂，防水防潮性能卓越，硬度高卻不傷刀。
+          使用越久，木色越深沉溫潤，是會隨時間一起變美的廚房夥伴。
+        </p>
+        <p>
+          <strong>材質特點：</strong>天然高油脂抗菌防霉、硬度適中不傷刀刃、
+          深色木紋越用越有韻味。表面以食品級木蠟油塗裝，安全無毒。
+        </p>
+        <div class="about-features">
+          <div class="about-feat"><div class="num">100%</div><div class="label">非洲柚木</div></div>
+          <div class="about-feat"><div class="num">手工</div><div class="label">職人打磨</div></div>
+          <div class="about-feat"><div class="num">食品級</div><div class="label">木蠟油塗裝</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="section-inner">
+    <div class="section-label">PRODUCT LINEUP</div>
+    <div class="section-title">三種尺寸，<strong>滿足不同需求</strong></div>
+    <div class="products-grid">
+
+      <div class="product-card" onclick="selectSize('S')">
+        <div class="product-visual">
+          <img src="images/board-small.jpg" alt="經典小板 S - 25x18x2cm">
+        </div>
+        <h3>經典小板 S</h3>
+        <p class="product-spec">25 x 18 x 2 cm</p>
+        <div class="product-price"><span>NT$</span>680</div>
+        <button class="product-btn">選擇此規格</button>
+      </div>
+
+      <div class="product-card popular" onclick="selectSize('M')">
+        <div class="product-visual">
+          <img src="images/board-medium.jpg" alt="萬用中板 M - 35x25x2.5cm">
+        </div>
+        <h3>萬用中板 M</h3>
+        <p class="product-spec">35 x 25 x 2.5 cm</p>
+        <div class="product-price"><span>NT$</span>980</div>
+        <button class="product-btn">選擇此規格</button>
+      </div>
+
+      <div class="product-card" onclick="selectSize('L')">
+        <div class="product-visual">
+          <img src="images/board-large.jpg" alt="料理大板 L - 45x30x3cm">
+        </div>
+        <h3>料理大板 L</h3>
+        <p class="product-spec">45 x 30 x 3 cm</p>
+        <div class="product-price"><span>NT$</span>1,380</div>
+        <button class="product-btn">選擇此規格</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <div class="section-label">CRAFTSMANSHIP</div>
+    <div class="section-title">職人工藝，<strong>細節呈現</strong></div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/gallery-prep.jpg" alt="專業食材處理">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery-lifestyle.jpg" alt="生活品味">
+      </div>
+      <div class="gallery-item">
+        <img src="images/gallery-texture.jpg" alt="天然木紋質感">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ORDER FORM -->
+<section id="order">
+  <div class="section-inner">
+    <div class="section-label">ORDER NOW</div>
+    <div class="section-title">立即<strong>訂購</strong></div>
+    <div class="order-wrapper">
+
+      <form id="orderForm" onsubmit="return submitOrder(event)">
+        <!-- Size selector -->
+        <label style="font-size:0.82rem;color:var(--text-light);letter-spacing:1px;margin-bottom:0.5rem;display:block;">選擇規格</label>
+        <div class="size-selector">
+          <div class="size-option" data-size="S" onclick="pickSize('S')">
+            <div class="s-name">S 小板</div>
+            <div class="s-dim">25x18x2cm</div>
+            <div class="s-price">NT$680</div>
+          </div>
+          <div class="size-option active" data-size="M" onclick="pickSize('M')">
+            <div class="s-name">M 中板</div>
+            <div class="s-dim">35x25x2.5cm</div>
+            <div class="s-price">NT$980</div>
+          </div>
+          <div class="size-option" data-size="L" onclick="pickSize('L')">
+            <div class="s-name">L 大板</div>
+            <div class="s-dim">45x30x3cm</div>
+            <div class="s-price">NT$1,380</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>數量</label>
+          <select id="qty" onchange="updateSummary()">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>姓名 *</label>
+            <input type="text" id="name" required placeholder="收件人姓名">
+          </div>
+          <div class="form-group">
+            <label>手機 *</label>
+            <input type="tel" id="phone" required placeholder="0912-345-678">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="選填，用於寄送訂單確認">
+        </div>
+
+        <div class="form-group">
+          <label>收件地址 *</label>
+          <input type="text" id="address" required placeholder="完整收件地址">
+        </div>
+
+        <div class="form-group">
+          <label>備註</label>
+          <textarea id="note" placeholder="特殊需求或備註事項（選填）"></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">確認送出訂單</button>
+      </form>
+
+      <!-- Summary sidebar -->
+      <div class="order-summary">
+        <div class="summary-title">訂單摘要</div>
+        <div class="summary-row">
+          <span class="label">商品</span>
+          <span class="value" id="sum-product">萬用中板 M</span>
+        </div>
+        <div class="summary-row">
+          <span class="label">規格</span>
+          <span class="value" id="sum-spec">35x25x2.5cm</span>
+        </div>
+        <div class="summary-row">
+          <span class="label">單價</span>
+          <span class="value" id="sum-price">NT$980</span>
+        </div>
+        <div class="summary-row">
+          <span class="label">數量</span>
+          <span class="value" id="sum-qty">1</span>
+        </div>
+        <div class="summary-total">
+          <span>合計</span>
+          <span id="sum-total">NT$980</span>
+        </div>
+
+        <div class="bank-info">
+          <h4>匯款資訊</h4>
+          <p>
+            <strong>銀行：</strong>（請填入您的銀行名稱與代碼）<br>
+            <strong>帳號：</strong>（請填入您的銀行帳號）<br>
+            <strong>戶名：</strong>隆盛木業<br><br>
+            匯款後請保留收據，並告知匯款帳號末五碼：<br>
+            📱 LINE：<a href="https://line.me/ti/p/~joannachiayi" target="_blank" style="color: var(--accent);">@joannachiayi</a><br>
+            📞 電話：0921-211-026
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="images/bottom logo.png" alt="隆盛木業" class="footer-logo">
+</footer>
+
+<!-- CONFIRMATION MODAL -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div class="check-icon">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    </div>
+    <h2>訂單已送出！</h2>
+    <div class="order-num" id="modalOrderNum"></div>
+    <div class="transfer-box" id="modalTransferInfo"></div>
+    <div class="payment-instruction">
+      <h4>💰 匯款完成後</h4>
+      <p>請透過 LINE 或來電告知：</p>
+      <ul>
+        <li>訂單編號</li>
+        <li>匯款帳號<strong>後五碼</strong></li>
+        <li>匯款金額</li>
+      </ul>
+      <div class="contact-info">
+        <p>📱 LINE：<a href="https://line.me/ti/p/~joannachiayi" target="_blank">@joannachiayi</a></p>
+        <p>📞 電話：0921-211-026</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">已複製到剪貼簿</div>
+
+<script>
+// ====== GOOGLE SHEETS 設定 ======
+// Google Apps Script 網路應用程式網址
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbzVF6-le3cIVtW7AvjYRKs0MMsKnwIEw06_MBraKWOCnpeonTtc7wE6voPvgZgrM8frOg/exec';
+
+// ====== PRODUCT DATA ======
+const PRODUCTS = {
+  S: { name:'經典小板 S', spec:'25x18x2cm', price:680 },
+  M: { name:'萬用中板 M', spec:'35x25x2.5cm', price:980 },
+  L: { name:'料理大板 L', spec:'45x30x3cm', price:1380 },
+};
+
+let selectedSize = 'M';
+let lastOrder = null;
+
+// ====== SIZE SELECTION ======
+function pickSize(size) {
+  selectedSize = size;
+  document.querySelectorAll('.size-option').forEach(el => {
+    el.classList.toggle('active', el.dataset.size === size);
+  });
+  updateSummary();
+}
+
+function selectSize(size) {
+  pickSize(size);
+  document.getElementById('order').scrollIntoView({ behavior:'smooth' });
+}
+
+// ====== UPDATE SUMMARY ======
+function updateSummary() {
+  const p = PRODUCTS[selectedSize];
+  const qty = parseInt(document.getElementById('qty').value);
+  document.getElementById('sum-product').textContent = p.name;
+  document.getElementById('sum-spec').textContent = p.spec;
+  document.getElementById('sum-price').textContent = 'NT$' + p.price.toLocaleString();
+  document.getElementById('sum-qty').textContent = qty;
+  document.getElementById('sum-total').textContent = 'NT$' + (p.price * qty).toLocaleString();
+}
+
+// ====== GENERATE ORDER ID ======
+function genOrderId() {
+  const d = new Date();
+  const date = d.getFullYear().toString().slice(2) +
+    String(d.getMonth()+1).padStart(2,'0') +
+    String(d.getDate()).padStart(2,'0');
+  const rand = String(Math.floor(Math.random()*10000)).padStart(4,'0');
+  return 'LS' + date + rand;
+}
+
+// ====== SUBMIT ORDER ======
+function submitOrder(e) {
+  e.preventDefault();
+  const p = PRODUCTS[selectedSize];
+  const qty = parseInt(document.getElementById('qty').value);
+
+  const order = {
+    id: genOrderId(),
+    date: new Date().toLocaleString('zh-TW'),
+    size: selectedSize,
+    product: p.name,
+    spec: p.spec,
+    unitPrice: p.price,
+    qty: qty,
+    total: p.price * qty,
+    name: document.getElementById('name').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    note: document.getElementById('note').value.trim(),
+    status: '待匯款',
+    shipped: false,
+  };
+
+  lastOrder = order;
+
+  // Save to localStorage (for admin page on same device)
+  const orders = JSON.parse(localStorage.getItem('ls_orders') || '[]');
+  orders.push(order);
+  localStorage.setItem('ls_orders', JSON.stringify(orders));
+
+  // 送訂單到 Google Sheets
+  if (GOOGLE_SHEETS_URL && GOOGLE_SHEETS_URL !== '請在此貼上您的Google_Apps_Script網址') {
+    fetch(GOOGLE_SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(order)
+    }).then(() => {
+      console.log('✅ 訂單已送出到 Google Sheets');
+    }).catch(error => {
+      console.error('❌ 送出失敗:', error);
+    });
+  }
+
+  // Show modal
+  document.getElementById('modalOrderNum').textContent = '訂單編號：' + order.id;
+  document.getElementById('modalTransferInfo').innerHTML =
+    '<strong>請匯款至以下帳戶：</strong><br>' +
+    '銀行：（請填入銀行名稱與代碼）<br>' +
+    '帳號：（請填入銀行帳號）<br>' +
+    '戶名：隆盛木業<br>' +
+    '匯款金額：<strong>NT$' + order.total.toLocaleString() + '</strong><br><br>' +
+    '匯款後請聯繫 呂碧玲<br>' +
+    'LINE：<a href="https://line.me/ti/p/~joannachiayi" target="_blank" style="color: var(--accent);">@joannachiayi</a><br>' +
+    '電話：0921-211-026';
+
+  document.getElementById('confirmModal').classList.add('show');
+
+  // Reset form
+  document.getElementById('orderForm').reset();
+  pickSize('M');
+}
+
+// ====== CLOSE MODAL ======
+function closeModal() {
+  document.getElementById('confirmModal').classList.remove('show');
+}
+
+// ====== COPY ORDER TEXT ======
+function copyOrderText() {
+  if (!lastOrder) return;
+  const o = lastOrder;
+  const text = `【隆盛木業 - 砧板訂單】\n` +
+    `訂單編號：${o.id}\n` +
+    `商品：${o.product}（${o.spec}）\n` +
+    `數量：${o.qty}\n` +
+    `金額：NT$${o.total.toLocaleString()}\n` +
+    `收件人：${o.name}\n` +
+    `電話：${o.phone}\n` +
+    `地址：${o.address}\n` +
+    (o.note ? `備註：${o.note}\n` : '') +
+    `下單時間：${o.date}`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('已複製到剪貼簿');
+  }).catch(() => {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('已複製到剪貼簿');
+  });
+}
+
+// ====== SEND LINE ======
+function sendLine() {
+  if (!lastOrder) return;
+  const o = lastOrder;
+
+  // 準備訂單文字
+  const text = `【隆盛木業訂單】\n` +
+    `訂單編號：${o.id}\n` +
+    `商品：${o.product}（${o.spec}）\n` +
+    `數量：${o.qty}\n` +
+    `金額：NT$${o.total.toLocaleString()}\n` +
+    `收件人：${o.name}\n` +
+    `電話：${o.phone}\n` +
+    `地址：${o.address}\n` +
+    (o.note ? `備註：${o.note}\n` : '') +
+    `下單時間：${o.date}`;
+
+  // 先複製到剪貼簿
+  navigator.clipboard.writeText(text).then(() => {
+    showToast('✅ 訂單已複製！開啟 LINE 後貼上即可');
+    // 延遲一下再開啟 LINE，讓使用者看到提示
+    setTimeout(() => {
+      // 開啟 LINE 對話（加好友頁面）
+      window.open('https://line.me/ti/p/~joannachiayi', '_blank');
+    }, 500);
+  }).catch(() => {
+    // 備用方案
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('✅ 訂單已複製！開啟 LINE 後貼上即可');
+    setTimeout(() => {
+      window.open('https://line.me/ti/p/~joannachiayi', '_blank');
+    }, 500);
+  });
+}
+
+// ====== TOAST ======
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// Init
+updateSummary();
+</script>
+</body>
+</html>
