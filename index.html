@@ -60,7 +60,12 @@ nav {
 .nav-links a:hover { color: var(--wood); }
 
 @media(max-width:640px) {
-  .nav-links { display:none; }
+  nav {
+    justify-content: center; /* 手機版 Logo 置中 */
+  }
+  .nav-links {
+    display:none;
+  }
 }
 
 /* ====== HERO ====== */
